@@ -80,10 +80,23 @@ export default function BookingForm() {
 
   const carTypes = [
     { value: '', label: 'Select Car Type' },
-    { value: 'sedan', label: 'Sedan (Swift Dzire, Etios)' },
-    { value: 'suv', label: 'SUV (Ertiga, Innova)' },
-    { value: 'tempo', label: 'Tempo Traveller (12 Seater)' },
-    { value: 'luxury', label: 'Luxury (BMW, Mercedes)' },
+    // Hatchback
+    { value: 'wagonr', label: 'Wagonr' },
+    { value: 'baleno', label: 'Baleno' },
+    // Sedan
+    { value: 'swift_dzire', label: 'Swift Dzire' },
+    // SUV
+    { value: 'ertiga', label: 'Ertiga' },
+    { value: 'maruti_xl6', label: 'Maruti XL.6' },
+    { value: 'kia_carens', label: 'Kia Carens' },
+    { value: 'innova', label: 'Innova' },
+    { value: 'innova_crysta', label: 'Innova Crysta' },
+    // Van/Mini Bus
+    { value: 'winger', label: 'Winger' },
+    { value: 'tempo_travel', label: 'Tempo Travel' },
+    { value: 'urbania', label: 'Urbania' },
+    // Bus
+    { value: 'bus_45_seater', label: 'Bus (45 Seater)' },
   ]
 
   const popularLocations = [
