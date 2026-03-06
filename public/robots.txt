@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sandytaxi.com/sitemap.xml
+
