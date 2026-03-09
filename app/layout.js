@@ -1,5 +1,6 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
+import OneSignalInit from './components/OneSignalInit'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -59,7 +60,10 @@ export default function RootLayout({ children }) {
           }}
         />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <OneSignalInit />
+        {children}
+      </body>
     </html>
   )
 }

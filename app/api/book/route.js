@@ -39,6 +39,24 @@ export async function POST(request) {
       )
     }
 
+    // Send push notification to admin
+    try {
+      await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/send-notification`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          pickup_location,
+          drop_location,
+          full_name,
+        }),
+      })
+    } catch (notificationError) {
+      console.error('Notification error:', notificationError)
+      // Don't fail the booking if notification fails
+    }
+
     return NextResponse.json(
       { 
         message: 'Booking created successfully!',
