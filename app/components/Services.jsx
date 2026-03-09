@@ -7,31 +7,26 @@ const services = [
     icon: '✈️',
     title: 'Airport Transfers',
     description: 'Pickup and drop services from Dabolim & Mopa airports. Available 24/7 for all flight timings.',
-    price: '999',
   },
   {
     icon: '🏖️',
     title: 'North Goa Sightseeing',
     description: 'Explore iconic beaches like Baga, Calangute, Anjuna, and Vagator. Visit historic forts and churches.',
-    price: '2,499',
   },
   {
     icon: '🌴',
     title: 'South Goa Sightseeing',
     description: 'Discover pristine beaches of South Goa including Palolem, Agonda, and Colva. Visit spice plantations.',
-    price: '2,499',
   },
   {
     icon: '🗺️',
     title: 'Outstation Trips',
     description: 'Plan your adventure to nearby destinations like Dudhsagar Falls, Gokarna, and Mumbai.',
-    price: '3,999',
   },
   {
     icon: '🏢',
     title: 'Corporate Travel',
     description: 'Professional transportation for business travelers. On-time pickups, reliable service.',
-    price: '1,999',
   },
 ]
 
@@ -53,16 +48,13 @@ export default function Services() {
         {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <div key={index}>
-              <h3 className="sr-only">{service.title}</h3>
-              <ServiceCard
-                icon={service.icon}
-                title={service.title}
-                description={service.description}
-                price={service.price}
-                delay={(index + 1) * 100}
-              />
-            </div>
+            <ServiceCard
+              key={index}
+              icon={service.icon}
+              title={service.title}
+              description={service.description}
+              delay={(index + 1) * 100}
+            />
           ))}
         </div>
 
@@ -87,4 +79,3 @@ export default function Services() {
     </section>
   )
 }
-

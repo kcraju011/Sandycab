@@ -52,17 +52,17 @@ export default function Hero() {
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
+          <div className="flex gap-6 justify-center items-center pt-4">
             <a
               href="#booking"
               onClick={(e) => handleScroll(e, '#booking')}
-              className="btn-primary bg-primary text-secondary px-8 py-4 rounded-full text-lg font-semibold hover:bg-yellow-400 w-full sm:w-auto"
+              className="bg-yellow-400 text-black font-semibold px-8 py-4 rounded-full hover:bg-yellow-500 transition flex items-center gap-2"
             >
               Book Now
             </a>
             <a
-              href="tel:+91914868051"
-              className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold px-5 py-2 rounded-lg shadow transition-colors w-full sm:w-auto"
+              href="tel:+919148680513"
+              className="bg-yellow-400 text-black font-semibold px-8 py-4 rounded-full hover:bg-yellow-500 transition flex items-center gap-2"
             >
               📞 Call Now
             </a>
