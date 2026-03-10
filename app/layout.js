@@ -1,5 +1,6 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
+import Script from 'next/script'
 import OneSignalInit from './components/OneSignalInit'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -38,6 +39,21 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        <Script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer strategy="afterInteractive" />
+        <Script id="OneSignal-init" strategy="afterInteractive">
+          {`
+            window.OneSignalDeferred = window.OneSignalDeferred || [];
+            OneSignalDeferred.push(async function(OneSignal) {
+              await OneSignal.init({
+                appId: "88e59e90-98f2-4503-a819-20387ee1595a",
+                safari_web_id: "web.onesignal.auto.5f176c09-6482-49c9-87ea-0c57aa3981a0",
+                notifyButton: {
+                  enable: true,
+                },
+              });
+            });
+          `}
+        </Script>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -46,7 +62,7 @@ export default function RootLayout({ children }) {
               "@type": "TaxiService",
               "name": "Sandy Taxi Service",
               "areaServed": "Goa",
-              "telephone": "+91914868051",
+              "telephone": "+918867193161",
               "url": "https://sandytaxi.com",
               "priceRange": "$$",
               "description": "Best taxi service in Goa for airport transfers, sightseeing tours, and outstation trips.",

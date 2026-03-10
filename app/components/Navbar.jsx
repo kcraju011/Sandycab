@@ -1,17 +1,22 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
-  // Handle scroll effect
-  if (typeof window !== 'undefined') {
-    window.addEventListener('scroll', () => {
+  // Handle scroll effect - moved to useEffect to avoid side-effects in render
+  useEffect(() => {
+    const handleScroll = () => {
       setScrolled(window.scrollY > 50)
-    })
-  }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    
+    // Cleanup
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const navLinks = [
     { name: 'Home', href: '#home' },
@@ -132,7 +137,7 @@ export default function Navbar() {
                 Book Now
               </a>
               <a
-                href="tel:+91914868051"
+                href="tel:+918867193161"
                 className="block bg-yellow-500 hover:bg-yellow-600 text-black px-6 py-3 rounded-lg font-semibold text-center shadow"
               >
                 📞 Call Now

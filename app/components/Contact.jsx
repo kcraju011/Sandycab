@@ -28,7 +28,7 @@ export default function Contact() {
               <div className="flex-1">
                 <h3 className="text-lg font-semibold text-secondary mb-1">Phone</h3>
                 <a href="tel:+919148680513" className="text-gray-600 hover:text-primary transition-colors">
-                  +91 914 868 0513
+                  +91 91486 80513
                 </a>
                 <p className="text-sm text-gray-500 mt-1">Available 24/7</p>
                 <a
