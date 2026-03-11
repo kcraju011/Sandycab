@@ -65,7 +65,7 @@ export default function RootLayout({ children }) {
               "@type": "TaxiService",
               "name": "Sandy Taxi Service",
               "areaServed": "Goa",
-              "telephone": "+918867193161",
+"telephone": "+919148680513",
               "url": "https://sandytaxi.com",
               "priceRange": "$$",
               "description": "Best taxi service in Goa for airport transfers, sightseeing tours, and outstation trips.",

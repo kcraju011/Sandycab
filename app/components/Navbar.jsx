@@ -137,7 +137,7 @@ export default function Navbar() {
                 Book Now
               </a>
               <a
-                href="tel:+918867193161"
+                href="tel:+919148680513"
                 className="block bg-yellow-500 hover:bg-yellow-600 text-black px-6 py-3 rounded-lg font-semibold text-center shadow"
               >
                 📞 Call Now
