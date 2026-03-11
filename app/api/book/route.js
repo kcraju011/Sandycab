@@ -85,8 +85,8 @@ export async function POST(request) {
 
     // Send push notification to admin via OneSignal
     try {
-      const appId = process.env.NEXT_PUBLIC_ONESIGNAL_APP_ID;
-      const restApiKey = process.env.ONESIGNAL_REST_API_KEY;
+      const appId = 'f0db1e2b-07a1-4253-b033-73e04187f56e';
+      const restApiKey = 'fgbvyircfe6gndxluveazwf6n';
       
       if (appId && restApiKey) {
         const notificationMessage = `Pickup: ${pickup_location}\nDrop: ${drop_location}\nCustomer: ${full_name}`;

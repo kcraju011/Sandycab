@@ -15,8 +15,8 @@ export async function POST(request) {
     }
 
     // OneSignal API configuration
-    const appId = process.env.NEXT_PUBLIC_ONESIGNAL_APP_ID
-    const restApiKey = process.env.ONESIGNAL_REST_API_KEY
+    const appId = 'f0db1e2b-07a1-4253-b033-73e04187f56e'
+    const restApiKey = 'fgbvyircfe6gndxluveazwf6n'
 
     if (!appId || !restApiKey) {
       console.error('OneSignal configuration missing')
