@@ -61,7 +61,7 @@ export default function Hero() {
               Book Now
             </a>
             <a
-              href="tel:+919148680513"
+              href="tel:+918867193161"
               className="bg-yellow-400 text-black font-semibold px-8 py-4 rounded-full hover:bg-yellow-500 transition flex items-center gap-2"
             >
               📞 Call Now

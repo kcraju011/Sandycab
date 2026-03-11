@@ -27,12 +27,12 @@ export default function Contact() {
               </div>
               <div className="flex-1">
                 <h3 className="text-lg font-semibold text-secondary mb-1">Phone</h3>
-                <a href="tel:+919148680513" className="text-gray-600 hover:text-primary transition-colors">
-                  +91 91486 80513
+                <a href="tel:+918867193161" className="text-gray-600 hover:text-primary transition-colors">
+                  +91 88671 93161
                 </a>
                 <p className="text-sm text-gray-500 mt-1">Available 24/7</p>
                 <a
-                  href="tel:+919148680513"
+                  href="tel:+918867193161"
                   className="inline-flex items-center gap-2 bg-yellow-500 hover:bg-yellow-600 text-black font-semibold px-4 py-2 rounded-lg shadow mt-3 transition-colors"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

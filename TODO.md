@@ -1,22 +1,34 @@
-# TODO: Website SEO Improvements - COMPLETED
+# Rapido-like Booking Notification System - Implementation Plan
 
-## Task: Improve SEO for Sandy Taxi Service website
+## Project Overview
+Implement real-time booking notifications for the taxi website using Socket.IO
 
-### Completed Steps:
-- [x] 1. Global SEO Metadata - Updated app/layout.js with SEO metadata
-- [x] 2. Structured Data (Schema) - Added TaxiService JSON-LD in layout.js
-- [x] 3. Robots.txt - Created in public/robots.txt
-- [x] 4. Sitemap - Created in public/sitemap.xml
-- [x] 5. SEO Friendly Headings - Updated Hero.jsx with H1 tag
-- [x] 6. Image SEO - Using Next.js optimized images
-- [x] 7. Mobile SEO - Website is fully responsive with viewport meta
-- [x] 8. Fast Performance - Using Next.js Image optimization
-- [x] 9. Call Button - Added in Hero, Navbar, Contact, and Footer
-- [x] 10. Footer Business Info - Updated with Sandy Taxi Service details
+## Files to Create
+1. `server.js` - Custom server with Socket.IO integration
+2. `lib/socket.js` - Socket.IO client utility
+3. `app/components/BookingNotification.jsx` - Notification popup component
+4. Update `app/api/book/route.js` - Emit socket event on new booking
+5. Update `app/admin/dashboard/page.js` - Listen for real-time notifications
+6. Add `public/ringtone.mp3` - Ringtone sound file
 
-### Business Info:
-- Business Name: Sandy Taxi Service
-- Phone: +91 914868051
-- Location: Goa, India
-- Website: https://sandytaxi.com
+## Dependencies to Install
+- socket.io
+- socket.io-client
+
+## Implementation Steps
+1. Install Socket.IO dependencies
+2. Create custom server with Socket.IO
+3. Create socket client utility
+4. Update booking API to emit events
+5. Add notification component with sound
+6. Integrate with admin dashboard
+
+## Expected Behavior
+1. User submits booking form
+2. Booking saved to database
+3. Socket.IO emits 'new-booking' event
+4. Admin dashboard receives event
+5. Ringtone plays automatically
+6. Popup shows "New Taxi Booking"
+7. Notification continues until admin clicks "Accept"
 

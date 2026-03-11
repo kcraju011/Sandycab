@@ -1,14 +1,80 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
+import { io } from 'socket.io-client'
+import BookingNotification from '@/app/components/BookingNotification'
 
 export default function AdminDashboard() {
   const [bookings, setBookings] = useState([])
   const [loading, setLoading] = useState(true)
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [pendingNotification, setPendingNotification] = useState(null)
+  const [socket, setSocket] = useState(null)
   const router = useRouter()
+
+  // Connect to socket server
+  useEffect(() => {
+    const socketUrl = process.env.NEXT_PUBLIC_SOCKET_URL || 'http://localhost:3001';
+    const newSocket = io(socketUrl, {
+      transports: ['websocket', 'polling'],
+      reconnection: true,
+    });
+
+    newSocket.on('connect', () => {
+      console.log('Socket connected:', newSocket.id);
+      newSocket.emit('join-admin');
+    });
+
+    newSocket.on('newBooking', (booking) => {
+      console.log('New booking received:', booking);
+      setPendingNotification(booking);
+    });
+
+    setSocket(newSocket);
+
+    return () => {
+      newSocket.disconnect();
+    };
+  }, []);
+
+  // Handle incoming notification
+  const handleAcceptBooking = useCallback(async (bookingFromNotification) => {
+    // Update status to confirmed
+    const { error } = await supabase
+      .from('bookings')
+      .update({ status: 'Confirmed' })
+      .eq('id', bookingFromNotification.id)
+
+    if (!error) {
+      fetchBookings()
+      setPendingNotification(null)
+      
+      // Send WhatsApp message to customer
+      const message = `Hello ${bookingFromNotification.full_name},
+
+Your taxi booking has been confirmed.
+
+Pickup: ${bookingFromNotification.pickup_location}
+Drop: ${bookingFromNotification.drop_location}
+Date: ${bookingFromNotification.travel_date}
+Time: ${bookingFromNotification.travel_time}
+
+Driver will contact you soon.
+
+Sandy Taxi Service
+sandytaxi.com`
+
+      const phone = bookingFromNotification.phone.replace(/\D/g, '')
+      const whatsappUrl = `https://wa.me/91${phone}?text=${encodeURIComponent(message)}`
+      window.open(whatsappUrl, '_blank')
+    }
+  }, []);
+
+  const handleCloseNotification = useCallback(() => {
+    setPendingNotification(null);
+  }, []);
 
   useEffect(() => {
     const isLoggedIn = localStorage.getItem('admin_logged_in')
@@ -61,36 +127,38 @@ export default function AdminDashboard() {
     }
   }
 
-  const handleAcceptBooking = async (booking) => {
+  // Handle notification accept
+  const handleNotificationAccept = useCallback(async (bookingFromNotification) => {
     // Update status to confirmed
     const { error } = await supabase
       .from('bookings')
       .update({ status: 'Confirmed' })
-      .eq('id', booking.id)
+      .eq('id', bookingFromNotification.id)
 
     if (!error) {
       fetchBookings()
+      setPendingNotification(null)
       
       // Send WhatsApp message to customer
-      const message = `Hello ${booking.full_name},
+      const message = `Hello ${bookingFromNotification.full_name},
 
 Your taxi booking has been confirmed.
 
-Pickup: ${booking.pickup_location}
-Drop: ${booking.drop_location}
-Date: ${booking.travel_date}
-Time: ${booking.travel_time}
+Pickup: ${bookingFromNotification.pickup_location}
+Drop: ${bookingFromNotification.drop_location}
+Date: ${bookingFromNotification.travel_date}
+Time: ${bookingFromNotification.travel_time}
 
 Driver will contact you soon.
 
 Sandy Taxi Service
 sandytaxi.com`
 
-      const phone = booking.phone.replace(/\D/g, '')
+      const phone = bookingFromNotification.phone.replace(/\D/g, '')
       const whatsappUrl = `https://wa.me/91${phone}?text=${encodeURIComponent(message)}`
       window.open(whatsappUrl, '_blank')
     }
-  }
+  }, []);
 
   const handleCancelBooking = async (booking) => {
     // Update status to cancelled
@@ -137,6 +205,15 @@ sandytaxi.com`
 
   return (
     <div className="min-h-screen bg-slate-50">
+      {/* Booking Notification Popup */}
+      {pendingNotification && (
+        <BookingNotification
+          booking={pendingNotification}
+          onAccept={handleNotificationAccept}
+          onClose={handleCloseNotification}
+        />
+      )}
+
       {/* Mobile Sidebar Overlay */}
       {sidebarOpen && (
         <div

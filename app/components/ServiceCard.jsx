@@ -31,7 +31,7 @@ export default function ServiceCard({ icon, title, description, delay }) {
       <div className="flex flex-col sm:flex-row gap-3">
         {/* Call Now Button */}
         <a
-          href="tel:+919148680513"
+          href="tel:+918867193161"
           className="flex-1 flex items-center justify-center gap-2 bg-green-500 text-white py-3 px-4 rounded-lg font-semibold hover:bg-green-600 transition-colors"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

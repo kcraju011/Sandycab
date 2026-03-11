@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { FaUserShield } from 'react-icons/fa'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -72,6 +73,15 @@ export default function Navbar() {
               </a>
             ))}
             <a
+              href="/admin"
+              className={`font-medium transition-colors hover:text-[#facc15] flex items-center gap-1 ${
+                scrolled ? 'text-gray-700' : 'text-white'
+              }`}
+            >
+              <FaUserShield className="text-sm" />
+              Admin Login
+            </a>
+            <a
               href="#booking"
               onClick={(e) => handleLinkClick(e, '#booking')}
               className="btn-primary bg-primary text-secondary px-6 py-2 rounded-full font-semibold hover:bg-yellow-400"
@@ -130,6 +140,13 @@ export default function Navbar() {
                 </a>
               ))}
               <a
+                href="/admin"
+                className="block text-gray-700 font-medium hover:text-primary py-2 flex items-center gap-2"
+              >
+                <FaUserShield className="text-sm" />
+                Admin Login
+              </a>
+              <a
                 href="#booking"
                 onClick={(e) => handleLinkClick(e, '#booking')}
                 className="block bg-primary text-secondary px-6 py-3 rounded-full font-semibold text-center hover:bg-yellow-400"
@@ -137,7 +154,7 @@ export default function Navbar() {
                 Book Now
               </a>
               <a
-                href="tel:+919148680513"
+                href="tel:+918867193161"
                 className="block bg-yellow-500 hover:bg-yellow-600 text-black px-6 py-3 rounded-lg font-semibold text-center shadow"
               >
                 📞 Call Now
