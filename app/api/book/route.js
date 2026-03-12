@@ -85,25 +85,36 @@ export async function POST(request) {
 
     // Send push notification to admin via OneSignal
     try {
+      const notificationMessage = `
+🚕 New Taxi Booking!
+Pickup: ${pickup_location}
+Drop: ${drop_location}
+Phone: ${phone}
+Car: ${car_type}
+      `.trim();
+
       await fetch("https://onesignal.com/api/v1/notifications", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-    "Authorization": "Basic 66dozrgrpuzj5i363gki5vanh"
-  },
-  body: JSON.stringify({
-    app_id: "f18b385a-9fbc-4cd7-88ea-6b81eab98d85",
-    included_segments: ["Subscribed Users"],
-    headings: { en: "🚕 New Taxi Booking" },
-    contents: { 
-      en: `Pickup: ${pickup} → Drop: ${drop}`
-    }
-  })
-});
-   
-       
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Basic 66dozrgrpuzj5i363gki5vanh"
+        },
+        body: JSON.stringify({
+          app_id: "f18b385a-9fbc-4cd7-88ea-6b81eab98d85",
+          included_segments: ["Subscribed Users"],
+          headings: { en: "🚕 New Taxi Booking!" },
+          contents: { en: notificationMessage },
+          data: {
+            bookingId: data[0]?.id,
+            customerName: full_name,
+            customerPhone: phone
+          }
+        })
+      });
+
+      console.log('✅ OneSignal notification sent successfully');
     } catch (notificationError) {
-      console.error('OneSignal notification error:', notificationError);
+      console.error('❌ OneSignal notification error:', notificationError);
     }
 
     return NextResponse.json(

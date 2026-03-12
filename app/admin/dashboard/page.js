@@ -22,6 +22,7 @@ export default function AdminDashboard() {
       reconnection: true,
     });
 
+    // Wait for socket to connect before adding listeners
     newSocket.on('connect', () => {
       console.log('Socket connected:', newSocket.id);
       newSocket.emit('join-admin');
@@ -30,6 +31,10 @@ export default function AdminDashboard() {
     newSocket.on('newBooking', (booking) => {
       console.log('New booking received:', booking);
       setPendingNotification(booking);
+    });
+
+    newSocket.on('connect_error', (error) => {
+      console.error('Socket connection error:', error);
     });
 
     setSocket(newSocket);
