@@ -85,32 +85,23 @@ export async function POST(request) {
 
     // Send push notification to admin via OneSignal
     try {
-      const appId = 'f0db1e2b-07a1-4253-b033-73e04187f56e';
-      const restApiKey = 'fgbvyircfe6gndxluveazwf6n';
-      
-      if (appId && restApiKey) {
-        const notificationMessage = `Pickup: ${pickup_location}\nDrop: ${drop_location}\nCustomer: ${full_name}`;
-        
-        await fetch('https://onesignal.com/api/v1/notifications', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Basic ${restApiKey}`,
-          },
-          body: JSON.stringify({
-            app_id: appId,
-            headings: { en: '🚖 New Taxi Booking' },
-            contents: { en: notificationMessage },
-            url: 'https://sandytaxi.com/admin/dashboard',
-            android_sound: 'default',
-            android_vibration: true,
-            ios_sound: 'default',
-            ttl: 86400,
-            priority: 10,
-          }),
-        });
-        console.log('OneSignal push notification sent');
-      }
+      await fetch("https://onesignal.com/api/v1/notifications", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": "Basic 66dozrgrpuzj5i363gki5vanh"
+  },
+  body: JSON.stringify({
+    app_id: "f18b385a-9fbc-4cd7-88ea-6b81eab98d85",
+    included_segments: ["Subscribed Users"],
+    headings: { en: "🚕 New Taxi Booking" },
+    contents: { 
+      en: `Pickup: ${pickup} → Drop: ${drop}`
+    }
+  })
+});
+   
+       
     } catch (notificationError) {
       console.error('OneSignal notification error:', notificationError);
     }

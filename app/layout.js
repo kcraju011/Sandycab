@@ -37,51 +37,29 @@ export const metadata = {
   },
 }
 
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <Script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer strategy="afterInteractive" />
-        <Script id="OneSignal-init" strategy="afterInteractive">
+        <Script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" strategy="beforeInteractive" />
+        <Script id="onesignal-init" strategy="afterInteractive">
           {`
-            window.OneSignalDeferred = window.OneSignalDeferred || [];
-            OneSignalDeferred.push(async function(OneSignal) {
-              await OneSignal.init({
-                appId: "88e59e90-98f2-4503-a819-20387ee1595a",
-                safari_web_id: "web.onesignal.auto.5f176c09-6482-49c9-87ea-0c57aa3981a0",
-                notifyButton: {
-                  enable: true,
-                },
-              });
+          window.OneSignal = window.OneSignal || [];
+          OneSignal.push(function() {
+            OneSignal.init({
+              appId: "f18b385a-9fbc-4cd7-88ea-6b81eab98d85",
+              notifyButton: { 
+                enable: true 
+              }
             });
+          });
           `}
         </Script>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "TaxiService",
-              "name": "Sandy Taxi Service",
-              "areaServed": "Goa",
-"telephone": "+918867193161",
-              "url": "https://sandytaxi.com",
-              "priceRange": "$$",
-              "description": "Best taxi service in Goa for airport transfers, sightseeing tours, and outstation trips.",
-              "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "Goa",
-                "addressRegion": "Goa",
-                "addressCountry": "India"
-              }
-            })
-          }}
-        />
       </head>
       <body className={inter.className}>
         {children}
       </body>
     </html>
-  )
+  );
 }
-
